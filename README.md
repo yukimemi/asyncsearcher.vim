@@ -39,7 +39,7 @@ dvpm.add({ url: "yukimemi/asyncsearcher.vim" });
 # Usage 
 
 No special settings are required.
-Default is [config.toml](https://github.com/yukimemi/asyncsearcher/blob/main/denops/asyncsearcher/config.toml)
+Default is [config.toml](https://github.com/yukimemi/asyncsearcher.vim/blob/main/denops/asyncsearcher/config.toml)
 
 # Commands 
 
