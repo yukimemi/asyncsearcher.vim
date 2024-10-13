@@ -1,5 +1,10 @@
-import * as _ from "https://cdn.skypack.dev/lodash@4.17.21";
-import * as flags from "https://deno.land/std@0.224.0/flags/mod.ts";
+// =============================================================================
+// File        : main.ts
+// Author      : yukimemi
+// Last Change : 2024/10/13 18:04:31.
+// =============================================================================
+
+import * as _ from "jsr:@es-toolkit/es-toolkit@1.24.0";
 import * as fn from "https://deno.land/x/denops_std@v6.5.1/function/mod.ts";
 import * as fs from "https://deno.land/std@0.224.0/fs/mod.ts";
 import * as helper from "https://deno.land/x/denops_std@v6.5.1/helper/mod.ts";
@@ -10,13 +15,14 @@ import type { Denops } from "https://deno.land/x/denops_std@v6.5.1/mod.ts";
 import { TextLineStream } from "https://deno.land/std@0.224.0/streams/mod.ts";
 import { abortable } from "https://deno.land/std@0.224.0/async/mod.ts";
 import { batch } from "https://deno.land/x/denops_std@v6.5.1/batch/mod.ts";
-import { ensure, is } from "https://deno.land/x/unknownutil@v3.18.1/mod.ts";
+import { parseArgs } from "jsr:@std/cli@1.0.6";
+import { z } from "npm:zod@3.23.8";
 
-type Tool = {
-  name: string;
-  cmd: string;
-  arg: string[];
-};
+const ToolSchema = z.object({
+  name: z.string(),
+  cmd: z.string(),
+  arg: z.array(z.string()),
+});
 
 async function* iterLine(r: ReadableStream<Uint8Array>): AsyncIterable<string> {
   const lines = r
@@ -24,15 +30,16 @@ async function* iterLine(r: ReadableStream<Uint8Array>): AsyncIterable<string> {
     .pipeThrough(new TextLineStream());
 
   for await (const line of lines) {
-    if (ensure(line, is.String).length) {
-      yield ensure(line, is.String);
+    const l = z.string().parse(line);
+    if (l.length) {
+      yield l;
     }
   }
 }
 
 export async function main(denops: Denops): Promise<void> {
   // debug.
-  const debug = await vars.g.get(denops, "asyngrep_debug", false);
+  const debug = await vars.g.get(denops, "asyncsearch_debug", false);
   // deno-lint-ignore no-explicit-any
   const clog = (...data: any[]): void => {
     if (debug) {
@@ -47,43 +54,25 @@ export async function main(denops: Denops): Promise<void> {
   clog({ cfg });
 
   // User config.
-  const userToml = ensure(
+  const userToml = z.string().parse(
     await fn.expand(
       denops,
-      ensure(
-        await vars.g.get(denops, "asyngrep_cfg_path", "~/.asyngrep.toml"),
-        is.String,
-      ),
+      await vars.g.get(denops, "asyncsearch_cfg_path", "~/.asyncsearch.toml"),
     ),
-    is.String,
   );
-  clog(`g:asyngrep_cfg_path = ${userToml}`);
+  clog(`g:asyncsearch_cfg_path = ${userToml}`);
   if (await fs.exists(userToml)) {
-    clog(`Merge user config: ${userToml}`);
-    cfg = {
-      tool: [
-        ...ensure(
-          cfg.tool,
-          is.ArrayOf((x): x is Tool => is.Record(x)),
-        ),
-        ...ensure(
-          toml.parse(await Deno.readTextFile(userToml)).tool,
-          is.ArrayOf((x): x is Tool => is.Record(x)),
-        ),
-      ],
-    };
+    clog(`Use user config: ${userToml}`);
+    cfg = toml.parse(await Deno.readTextFile(userToml));
   }
-
-  cfg = cfg as Record<string, Tool[]>;
 
   clog({ cfg });
 
+  const tools = ToolSchema.array().parse(cfg.tool);
+  clog({ tools });
+
   // Set default tool name.
-  const tools = ensure(
-    cfg.tool,
-    is.ArrayOf((x): x is Tool => is.Record(x)),
-  );
-  const executable = tools.find(async (x) => ensure(await fn.executable(denops, x.cmd), is.Number));
+  const executable = tools.find(async (x) => await fn.executable(denops, x.cmd));
   const def = tools.find((x) => x.name === "default") ?? executable;
   clog({ def });
 
@@ -91,14 +80,14 @@ export async function main(denops: Denops): Promise<void> {
   let abortController = new AbortController();
 
   denops.dispatcher = {
-    async asyngrep(...args: unknown[]): Promise<void> {
+    async asyncsearch(...args: unknown[]): Promise<void> {
       try {
         clog({ args });
-        const arg = ensure(args, is.ArrayOf(is.String));
-        const a = flags.parse(arg);
+        const arg = z.array(z.string()).parse(args);
+        const a = parseArgs(arg);
         const dir = a.path ?? await helper.input(denops, {
           prompt: "Search directory: ",
-          text: ensure(await fn.getcwd(denops), is.String),
+          text: await fn.getcwd(denops),
           completion: "dir",
         });
         clog({ dir });
@@ -109,7 +98,7 @@ export async function main(denops: Denops): Promise<void> {
           });
           if (userInput == null || userInput === "") {
             clog(`input is nothing ! so cancel !`);
-            await helper.echo(denops, `dps-asyngrep: cancel !`);
+            await helper.echo(denops, `asyncsearch: cancel !`);
             return;
           }
           pattern = userInput;
@@ -118,7 +107,7 @@ export async function main(denops: Denops): Promise<void> {
         clog({ pattern });
         clog({ tool });
         if (!tool) {
-          console.warn(`Grep tool [${a.tool}] is not found !`);
+          console.warn(`Search tool [${a.tool}] is not found !`);
           return;
         }
         const userArg = arg.filter(
@@ -127,7 +116,7 @@ export async function main(denops: Denops): Promise<void> {
         clog({ userArg });
 
         const toolArg = [...tool.arg, ...userArg];
-        const cmdArgs = ensure([...toolArg, pattern], is.ArrayOf(is.String));
+        const cmdArgs = [...toolArg, pattern];
         clog(`pid: ${p?.pid}`);
         try {
           clog("kill process");
@@ -137,13 +126,10 @@ export async function main(denops: Denops): Promise<void> {
           clog(e);
         }
         abortController = new AbortController();
-        const expandDir = ensure(
-          path.resolve(ensure(await fn.expand(denops, dir), is.String)),
-          is.String,
-        );
+        const expandDir = path.resolve(z.string().parse(await fn.expand(denops, dir)));
         clog({ cmdArgs, expandDir });
 
-        clog(`--- asyngrep start ---`);
+        clog(`--- asyncsearch start ---`);
 
         p = new Deno.Command(tool.cmd, {
           args: cmdArgs,
@@ -180,7 +166,7 @@ export async function main(denops: Denops): Promise<void> {
           await fn.setqflist(denops, [], "a", { lines: [line] });
         }
 
-        clog(`--- asyngrep end ---`);
+        clog(`--- asyncsearch end ---`);
 
         const status = await p.status;
         if (!status.success) {
@@ -205,9 +191,9 @@ export async function main(denops: Denops): Promise<void> {
     function! s:${denops.name}_notify(method, params) abort
       call denops#plugin#wait_async('${denops.name}', function('denops#notify', ['${denops.name}', a:method, a:params]))
     endfunction
-    command! -nargs=* Agp call s:${denops.name}_notify('asyngrep', [<f-args>])
+    command! -nargs=* AsyncSearch call s:${denops.name}_notify('asyncsearch', [<f-args>])
   `,
   );
 
-  clog("dps-asyngrep has loaded");
+  clog("asyncsearch has loaded");
 }
