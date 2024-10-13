@@ -1,7 +1,7 @@
 // =============================================================================
 // File        : main.ts
 // Author      : yukimemi
-// Last Change : 2024/10/13 18:04:31.
+// Last Change : 2024/10/13 18:39:04.
 // =============================================================================
 
 import * as _ from "jsr:@es-toolkit/es-toolkit@1.24.0";
@@ -39,7 +39,7 @@ async function* iterLine(r: ReadableStream<Uint8Array>): AsyncIterable<string> {
 
 export async function main(denops: Denops): Promise<void> {
   // debug.
-  const debug = await vars.g.get(denops, "asyncsearch_debug", false);
+  const debug = await vars.g.get(denops, "asyncsearcher_debug", false);
   // deno-lint-ignore no-explicit-any
   const clog = (...data: any[]): void => {
     if (debug) {
@@ -57,10 +57,10 @@ export async function main(denops: Denops): Promise<void> {
   const userToml = z.string().parse(
     await fn.expand(
       denops,
-      await vars.g.get(denops, "asyncsearch_cfg_path", "~/.asyncsearch.toml"),
+      await vars.g.get(denops, "asyncsearcher_cfg_path", "~/.asyncsearcher.toml"),
     ),
   );
-  clog(`g:asyncsearch_cfg_path = ${userToml}`);
+  clog(`g:asyncsearcher_cfg_path = ${userToml}`);
   if (await fs.exists(userToml)) {
     clog(`Use user config: ${userToml}`);
     cfg = toml.parse(await Deno.readTextFile(userToml));
@@ -195,5 +195,5 @@ export async function main(denops: Denops): Promise<void> {
   `,
   );
 
-  clog("asyncsearch has loaded");
+  clog("asyncsearcher has loaded");
 }

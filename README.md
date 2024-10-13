@@ -1,4 +1,4 @@
-# asyncsearch
+# asyncsearcher
 
 Denops Async Search plugin.
 
@@ -16,7 +16,7 @@ If you use [folke/lazy.nvim](https://github.com/folke/lazy.nvim).
 
 ```lua
 {
-  "yukimemi/asyncsearch.vim",
+  "yukimemi/asyncsearcher.vim",
   lazy = false,
   dependencies = {
     "vim-denops/denops.vim",
@@ -27,7 +27,7 @@ If you use [folke/lazy.nvim](https://github.com/folke/lazy.nvim).
 If you use [yukimemi/dvpm](https://github.com/yukimemi/dvpm).
 
 ```typescript
-dvpm.add({ url: "yukimemi/asyncsearch.vim" });
+dvpm.add({ url: "yukimemi/asyncsearcher.vim" });
 ```
 
 # Requirements 
@@ -39,7 +39,7 @@ dvpm.add({ url: "yukimemi/asyncsearch.vim" });
 # Usage 
 
 No special settings are required.
-Default is [config.toml](https://github.com/yukimemi/asyncsearch/blob/main/denops/asyncsearch/config.toml)
+Default is [config.toml](https://github.com/yukimemi/asyncsearcher/blob/main/denops/asyncsearcher/config.toml)
 
 # Commands 
 
@@ -50,13 +50,13 @@ Asyncronous grep.
 
 No settings are required. However, the following settings can be made if necessary.
 
-`g:asyncsearch_debug`                        
+`g:asyncsearcher_debug`                        
 Enable debug messages.
 default is v:false
 
-`g:asyncsearch_cfg_path`                                          
+`g:asyncsearcher_cfg_path`                                          
 Path to config toml file path.
-default is `~/.asyncsearch.toml`
+default is `~/.asyncsearcher.toml`
 
 # Example 
 
@@ -64,9 +64,9 @@ default is `~/.asyncsearch.toml`
 
 ```vim
 " Debug log option.
-let g:asyncsearch_debug = v:false
+let g:asyncsearcher_debug = v:false
 " User config (not necessary)
-let g:asyncsearch_cfg_path = "~/.config/asyncsearch/config.toml"
+let g:asyncsearcher_cfg_path = "~/.config/asyncsearcher/config.toml"
 
 " Search with default tool.
 nnoremap <space>ss <cmd>AsyncSearch<cr>

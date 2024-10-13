@@ -1,12 +1,12 @@
-*asyncsearch.txt*                                                 async search.
+*asyncsearcher.txt*                                                 async search.
 =============================================================================
-asyncsearch~
+asyncsearcher~
 
 Denops Async Search plugin.
 
 =============================================================================
 Features ~
-                                                          *asyncsearch-features*
+                                                          *asyncsearcher-features*
 
 This plugin is a wrapper for some grep tools.
 
@@ -16,13 +16,13 @@ This plugin is a wrapper for some grep tools.
 
 =============================================================================
 Installation ~
-                                                      *asyncsearch-installation*
+                                                      *asyncsearcher-installation*
 
 If you use folke/lazy.nvim |https://github.com/folke/lazy.nvim|.
 
 >
 	{
-	  "yukimemi/asyncsearch.vim",
+	  "yukimemi/asyncsearcher.vim",
 	  lazy = false,
 	  dependencies = {
 	    "vim-denops/denops.vim",
@@ -33,55 +33,55 @@ If you use folke/lazy.nvim |https://github.com/folke/lazy.nvim|.
 If you use yukimemi/dvpm |https://github.com/yukimemi/dvpm|.
 
 >
-	dvpm.add({ url: "yukimemi/asyncsearch.vim" });
+	dvpm.add({ url: "yukimemi/asyncsearcher.vim" });
 <
 
 =============================================================================
 Requirements ~
-                                                      *asyncsearch-requirements*
+                                                      *asyncsearcher-requirements*
 
 - [Deno - A modern runtime for JavaScript and TypeScript](https://deno.land/)
 - [vim-denops/denops.vim: 🐜 An ecosystem of Vim/Neovim which allows developers to write cross-platform plugins in Deno](https://github.com/vim-denops/denops.vim)
 - Some grep tools. rg, pt, jvgrep, ugrep etc.
 =============================================================================
 Usage ~
-                                                             *asyncsearch-usage*
+                                                             *asyncsearcher-usage*
 
 No special settings are required.
-Default is config.toml |https://github.com/yukimemi/asyncsearch/blob/main/denops/asyncsearch/config.toml|
+Default is config.toml |https://github.com/yukimemi/asyncsearcher/blob/main/denops/asyncsearcher/config.toml|
 
 =============================================================================
 Commands ~
-                                                          *asyncsearch-commands*
+                                                          *asyncsearcher-commands*
 
 `:AsyncSearch`                                                                *:AsyncSearch*
 Asyncronous search.
 
 =============================================================================
 Config ~
-                                                            *asyncsearch-config*
+                                                            *asyncsearcher-config*
 
 No settings are required. However, the following settings can be made if necessary.
 
-`g:asyncsearch_debug`                        *g:asyncsearch_debug*
+`g:asyncsearcher_debug`                        *g:asyncsearcher_debug*
 Enable debug messages.
 default is v:false
 
-`g:asyncsearch_cfg_path`                                          *g:asyncsearch_cfg_path*
+`g:asyncsearcher_cfg_path`                                          *g:asyncsearcher_cfg_path*
 Path to config toml file path.
-default is `~/.asyncsearch.toml`
+default is `~/.asyncsearcher.toml`
 
 =============================================================================
 Example ~
-                                                           *asyncsearch-example*
+                                                           *asyncsearcher-example*
 
 Example vim settings.~
 
 >
 	" Debug log option.
-	let g:asyncsearch_debug = v:false
+	let g:asyncsearcher_debug = v:false
 	" User config (not necessary)
-	let g:asyncsearch_cfg_path = "~/.config/asyncsearch/config.toml"
+	let g:asyncsearcher_cfg_path = "~/.config/asyncsearcher/config.toml"
 
 	" Search with default tool.
 	nnoremap <space>ss <cmd>AsyncSearch<cr>
@@ -126,7 +126,7 @@ Example toml config.~
 
 =============================================================================
 License ~
-                                                           *asyncsearch-license*
+                                                           *asyncsearcher-license*
 
 Licensed under MIT License.
 
