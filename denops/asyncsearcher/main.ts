@@ -4,7 +4,7 @@
 // Last Change : 2024/10/13 18:39:04.
 // =============================================================================
 
-import * as _ from "jsr:@es-toolkit/es-toolkit@1.25.2";
+import * as _ from "jsr:@es-toolkit/es-toolkit@1.26.1";
 import * as fn from "https://deno.land/x/denops_std@v6.5.1/function/mod.ts";
 import * as fs from "https://deno.land/std@0.224.0/fs/mod.ts";
 import * as helper from "https://deno.land/x/denops_std@v6.5.1/helper/mod.ts";
