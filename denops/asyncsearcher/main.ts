@@ -1,7 +1,7 @@
 // =============================================================================
 // File        : main.ts
 // Author      : yukimemi
-// Last Change : 2024/10/13 18:39:04.
+// Last Change : 2024/10/27 16:58:11.
 // =============================================================================
 
 import * as _ from "jsr:@es-toolkit/es-toolkit@1.26.1";
@@ -184,16 +184,6 @@ export async function main(denops: Denops): Promise<void> {
       }
     },
   };
-
-  await helper.execute(
-    denops,
-    `
-    function! s:${denops.name}_notify(method, params) abort
-      call denops#plugin#wait_async('${denops.name}', function('denops#notify', ['${denops.name}', a:method, a:params]))
-    endfunction
-    command! -nargs=* AsyncSearch call s:${denops.name}_notify('asyncsearch', [<f-args>])
-  `,
-  );
 
   clog("asyncsearcher has loaded");
 }
