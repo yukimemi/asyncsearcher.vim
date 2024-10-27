@@ -1,20 +1,20 @@
 // =============================================================================
 // File        : main.ts
 // Author      : yukimemi
-// Last Change : 2024/10/27 16:58:11.
+// Last Change : 2024/10/27 18:07:13.
 // =============================================================================
 
 import * as _ from "jsr:@es-toolkit/es-toolkit@1.26.1";
-import * as fn from "https://deno.land/x/denops_std@v6.5.1/function/mod.ts";
-import * as fs from "https://deno.land/std@0.224.0/fs/mod.ts";
-import * as helper from "https://deno.land/x/denops_std@v6.5.1/helper/mod.ts";
-import * as path from "https://deno.land/std@0.224.0/path/mod.ts";
-import * as toml from "https://deno.land/std@0.224.0/toml/mod.ts";
-import * as vars from "https://deno.land/x/denops_std@v6.5.1/variable/mod.ts";
-import type { Denops } from "https://deno.land/x/denops_std@v6.5.1/mod.ts";
-import { TextLineStream } from "https://deno.land/std@0.224.0/streams/mod.ts";
-import { abortable } from "https://deno.land/std@0.224.0/async/mod.ts";
-import { batch } from "https://deno.land/x/denops_std@v6.5.1/batch/mod.ts";
+import * as fn from "jsr:@denops/std@7.3.0/function";
+import * as fs from "jsr:@std/fs@1.0.5";
+import * as path from "jsr:@std/path@1.0.7";
+import * as toml from "jsr:@std/toml@1.0.1";
+import * as vars from "jsr:@denops/std@7.3.0/variable";
+import type { Denops } from "jsr:@denops/std@7.3.0";
+import { TextLineStream } from "jsr:@std/streams@1.0.7";
+import { abortable } from "jsr:@std/async@1.0.2/abortable";
+import { batch } from "jsr:@denops/std@7.3.0/batch";
+import { echo, input } from "jsr:@denops/std@7.3.0/helper";
 import { parseArgs } from "jsr:@std/cli@1.0.6";
 import { z } from "npm:zod@3.23.8";
 
@@ -85,7 +85,7 @@ export async function main(denops: Denops): Promise<void> {
         clog({ args });
         const arg = z.array(z.string()).parse(args);
         const a = parseArgs(arg);
-        const dir = a.path ?? await helper.input(denops, {
+        const dir = a.path ?? await input(denops, {
           prompt: "Search directory: ",
           text: await fn.getcwd(denops),
           completion: "dir",
@@ -93,12 +93,12 @@ export async function main(denops: Denops): Promise<void> {
         clog({ dir });
         let pattern = a._.length > 0 ? a._.join(" ") : "";
         if (pattern === "") {
-          const userInput = await helper.input(denops, {
+          const userInput = await input(denops, {
             prompt: "Search for pattern: ",
           });
           if (userInput == null || userInput === "") {
             clog(`input is nothing ! so cancel !`);
-            await helper.echo(denops, `asyncsearch: cancel !`);
+            await echo(denops, `asyncsearch: cancel !`);
             return;
           }
           pattern = userInput;
