@@ -5,16 +5,16 @@
 // =============================================================================
 
 import * as _ from "jsr:@es-toolkit/es-toolkit@1.27.0";
-import * as fn from "jsr:@denops/std@7.3.2/function";
+import * as fn from "jsr:@denops/std@7.4.0/function";
 import * as fs from "jsr:@std/fs@1.0.6";
 import * as path from "jsr:@std/path@1.0.8";
 import * as toml from "jsr:@std/toml@1.0.2";
-import * as vars from "jsr:@denops/std@7.3.2/variable";
-import type { Denops } from "jsr:@denops/std@7.3.2";
+import * as vars from "jsr:@denops/std@7.4.0/variable";
+import type { Denops } from "jsr:@denops/std@7.4.0";
 import { TextLineStream } from "jsr:@std/streams@1.0.8";
 import { abortable } from "jsr:@std/async@1.0.9/abortable";
-import { batch } from "jsr:@denops/std@7.3.2/batch";
-import { echo, input } from "jsr:@denops/std@7.3.2/helper";
+import { batch } from "jsr:@denops/std@7.4.0/batch";
+import { echo, input } from "jsr:@denops/std@7.4.0/helper";
 import { parseArgs } from "jsr:@std/cli@1.0.7";
 import { z } from "npm:zod@3.23.8";
 
