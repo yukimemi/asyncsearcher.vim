@@ -1,7 +1,7 @@
 // =============================================================================
 // File        : main.ts
 // Author      : yukimemi
-// Last Change : 2024/10/27 18:07:13.
+// Last Change : 2025/01/02 20:35:04.
 // =============================================================================
 
 import * as _ from "jsr:@es-toolkit/es-toolkit@1.31.0";
@@ -10,7 +10,7 @@ import * as fs from "jsr:@std/fs@1.0.8";
 import * as path from "jsr:@std/path@1.0.8";
 import * as toml from "jsr:@std/toml@1.0.2";
 import * as vars from "jsr:@denops/std@7.4.0/variable";
-import type { Denops } from "jsr:@denops/std@7.4.0";
+import type { Denops, Entrypoint } from "jsr:@denops/std@7.4.0";
 import { TextLineStream } from "jsr:@std/streams@1.0.8";
 import { abortable } from "jsr:@std/async@1.0.9/abortable";
 import { batch } from "jsr:@denops/std@7.4.0/batch";
@@ -37,7 +37,7 @@ async function* iterLine(r: ReadableStream<Uint8Array>): AsyncIterable<string> {
   }
 }
 
-export async function main(denops: Denops): Promise<void> {
+export const main: Entrypoint = async (denops: Denops) => {
   // debug.
   const debug = await vars.g.get(denops, "asyncsearcher_debug", false);
   // deno-lint-ignore no-explicit-any
@@ -186,4 +186,4 @@ export async function main(denops: Denops): Promise<void> {
   };
 
   clog("asyncsearcher has loaded");
-}
+};
