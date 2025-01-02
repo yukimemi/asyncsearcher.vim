@@ -1,7 +1,7 @@
 // =============================================================================
 // File        : main.ts
 // Author      : yukimemi
-// Last Change : 2025/01/02 20:35:04.
+// Last Change : 2025/01/02 21:44:06.
 // =============================================================================
 
 import * as _ from "jsr:@es-toolkit/es-toolkit@1.31.0";
@@ -158,10 +158,10 @@ export const main: Entrypoint = async (denops: Denops) => {
         ) {
           clog({ line });
           line = line.trim();
-          const lsp = line.split("|");
+          const lsp = line.split(":");
           if (!path.isAbsolute(lsp[0])) {
             const absolute = path.join(expandDir, lsp[0]);
-            line = [absolute, ...lsp.slice(1, -1)].join("|");
+            line = [absolute, ...lsp.slice(1)].join(":");
           }
           await fn.setqflist(denops, [], "a", { lines: [line] });
         }
