@@ -6,7 +6,7 @@
 
 import * as _ from "jsr:@es-toolkit/es-toolkit@1.32.0";
 import * as fn from "jsr:@denops/std@7.4.0/function";
-import * as fs from "jsr:@std/fs@1.0.11";
+import * as fs from "jsr:@std/fs@1.0.13";
 import * as path from "jsr:@std/path@1.0.8";
 import * as toml from "jsr:@std/toml@1.0.2";
 import * as vars from "jsr:@denops/std@7.4.0/variable";
