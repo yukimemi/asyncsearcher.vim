@@ -12,7 +12,7 @@ import * as toml from "jsr:@std/toml@1.0.2";
 import * as vars from "jsr:@denops/std@7.5.0/variable";
 import type { Denops, Entrypoint } from "jsr:@denops/std@7.5.0";
 import { TextLineStream } from "jsr:@std/streams@1.0.9";
-import { abortable } from "jsr:@std/async@1.0.10/abortable";
+import { abortable } from "jsr:@std/async@1.0.11/abortable";
 import { batch } from "jsr:@denops/std@7.5.0/batch";
 import { echo, input } from "jsr:@denops/std@7.5.0/helper";
 import { parseArgs } from "jsr:@std/cli@1.0.13";
