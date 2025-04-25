@@ -4,18 +4,18 @@
 // Last Change : 2025/01/02 21:44:06.
 // =============================================================================
 
-import * as _ from "jsr:@es-toolkit/es-toolkit@1.35.0";
+import * as _ from "jsr:@es-toolkit/es-toolkit@1.36.0";
 import * as fn from "jsr:@denops/std@7.5.0/function";
-import * as fs from "jsr:@std/fs@1.0.16";
-import * as path from "jsr:@std/path@1.0.8";
-import * as toml from "jsr:@std/toml@1.0.4";
+import * as fs from "jsr:@std/fs@1.0.17";
+import * as path from "jsr:@std/path@1.0.9";
+import * as toml from "jsr:@std/toml@1.0.5";
 import * as vars from "jsr:@denops/std@7.5.0/variable";
 import type { Denops, Entrypoint } from "jsr:@denops/std@7.5.0";
 import { TextLineStream } from "jsr:@std/streams@1.0.9";
 import { abortable } from "jsr:@std/async@1.0.12/abortable";
 import { batch } from "jsr:@denops/std@7.5.0/batch";
 import { echo, input } from "jsr:@denops/std@7.5.0/helper";
-import { parseArgs } from "jsr:@std/cli@1.0.16";
+import { parseArgs } from "jsr:@std/cli@1.0.17";
 import { z } from "npm:zod@3.24.3";
 
 const ToolSchema = z.object({
