@@ -4,7 +4,7 @@
 // Last Change : 2025/01/02 21:44:06.
 // =============================================================================
 
-import * as _ from "jsr:@es-toolkit/es-toolkit@1.36.0";
+import * as _ from "jsr:@es-toolkit/es-toolkit@1.37.2";
 import * as fn from "jsr:@denops/std@7.5.0/function";
 import * as fs from "jsr:@std/fs@1.0.17";
 import * as path from "jsr:@std/path@1.0.9";
