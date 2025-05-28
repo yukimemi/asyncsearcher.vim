@@ -15,7 +15,7 @@ import { TextLineStream } from "jsr:@std/streams@1.0.9";
 import { abortable } from "jsr:@std/async@1.0.13/abortable";
 import { batch } from "jsr:@denops/std@7.5.0/batch";
 import { echo, input } from "jsr:@denops/std@7.5.0/helper";
-import { parseArgs } from "jsr:@std/cli@1.0.17";
+import { parseArgs } from "jsr:@std/cli@1.0.18";
 import { z } from "npm:zod@3.25.30";
 
 const ToolSchema = z.object({
