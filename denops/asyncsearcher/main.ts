@@ -8,7 +8,7 @@ import * as _ from "jsr:@es-toolkit/es-toolkit@1.38.0";
 import * as fn from "jsr:@denops/std@7.5.0/function";
 import * as fs from "jsr:@std/fs@1.0.17";
 import * as path from "jsr:@std/path@1.1.0";
-import * as toml from "jsr:@std/toml@1.0.6";
+import * as toml from "jsr:@std/toml@1.0.7";
 import * as vars from "jsr:@denops/std@7.5.0/variable";
 import type { Denops, Entrypoint } from "jsr:@denops/std@7.5.0";
 import { TextLineStream } from "jsr:@std/streams@1.0.9";
