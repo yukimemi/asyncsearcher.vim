@@ -16,7 +16,7 @@ import { abortable } from "jsr:@std/async@1.0.13/abortable";
 import { batch } from "jsr:@denops/std@7.5.0/batch";
 import { echo, input } from "jsr:@denops/std@7.5.0/helper";
 import { parseArgs } from "jsr:@std/cli@1.0.19";
-import { z } from "npm:zod@3.25.51";
+import { z } from "npm:zod@3.25.53";
 
 const ToolSchema = z.object({
   name: z.string(),
