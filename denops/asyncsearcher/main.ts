@@ -11,7 +11,7 @@ import * as path from "jsr:@std/path@1.1.0";
 import * as toml from "jsr:@std/toml@1.0.7";
 import * as vars from "jsr:@denops/std@7.5.1/variable";
 import type { Denops, Entrypoint } from "jsr:@denops/std@7.5.1";
-import { TextLineStream } from "jsr:@std/streams@1.0.9";
+import { TextLineStream } from "jsr:@std/streams@1.0.10";
 import { abortable } from "jsr:@std/async@1.0.13/abortable";
 import { batch } from "jsr:@denops/std@7.5.1/batch";
 import { echo, input } from "jsr:@denops/std@7.5.1/helper";
