@@ -6,8 +6,8 @@
 
 import * as _ from "jsr:@es-toolkit/es-toolkit@1.39.5";
 import * as fn from "jsr:@denops/std@7.6.0/function";
-import * as fs from "jsr:@std/fs@1.0.18";
-import * as path from "jsr:@std/path@1.1.0";
+import * as fs from "jsr:@std/fs@1.0.19";
+import * as path from "jsr:@std/path@1.1.1";
 import * as toml from "jsr:@std/toml@1.0.8";
 import * as vars from "jsr:@denops/std@7.6.0/variable";
 import type { Denops, Entrypoint } from "jsr:@denops/std@7.6.0";
