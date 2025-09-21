@@ -1,0 +1,13 @@
+{
+  "imports": {
+    "@denops/std": "jsr:@denops/std@^8.0.0",
+    "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.39.10",
+    "@std/async": "jsr:@std/async@^1.0.14",
+    "@std/cli": "jsr:@std/cli@^1.0.22",
+    "@std/fs": "jsr:@std/fs@^1.0.19",
+    "@std/path": "jsr:@std/path@^1.1.2",
+    "@std/streams": "jsr:@std/streams@^1.0.12",
+    "@std/toml": "jsr:@std/toml@^1.0.10",
+    "zod": "npm:zod@^4.1.11"
+  }
+}

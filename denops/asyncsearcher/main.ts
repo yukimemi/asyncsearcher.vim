@@ -1,22 +1,22 @@
 // =============================================================================
 // File        : main.ts
 // Author      : yukimemi
-// Last Change : 2025/01/02 21:44:06.
+// Last Change : 2025/09/21 20:53:09.
 // =============================================================================
 
-import * as _ from "jsr:@es-toolkit/es-toolkit@1.39.10";
-import * as fn from "jsr:@denops/std@8.0.0/function";
-import * as fs from "jsr:@std/fs@1.0.19";
-import * as path from "jsr:@std/path@1.1.2";
-import * as toml from "jsr:@std/toml@1.0.10";
-import * as vars from "jsr:@denops/std@8.0.0/variable";
-import type { Denops, Entrypoint } from "jsr:@denops/std@8.0.0";
-import { TextLineStream } from "jsr:@std/streams@1.0.12";
-import { abortable } from "jsr:@std/async@1.0.14/abortable";
-import { batch } from "jsr:@denops/std@8.0.0/batch";
-import { echo, input } from "jsr:@denops/std@8.0.0/helper";
-import { parseArgs } from "jsr:@std/cli@1.0.22";
-import { z } from "npm:zod@4.1.11";
+import * as _ from "@es-toolkit/es-toolkit";
+import * as fn from "@denops/std/function";
+import * as fs from "@std/fs";
+import * as path from "@std/path";
+import * as toml from "@std/toml";
+import * as vars from "@denops/std/variable";
+import type { Denops, Entrypoint } from "@denops/std";
+import { TextLineStream } from "@std/streams";
+import { abortable } from "@std/async/abortable";
+import { batch } from "@denops/std/batch";
+import { echo, input } from "@denops/std/helper";
+import { parseArgs } from "@std/cli";
+import { z } from "zod";
 
 const ToolSchema = z.object({
   name: z.string(),
