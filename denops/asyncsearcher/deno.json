@@ -1,6 +1,6 @@
 {
   "imports": {
-    "@denops/std": "jsr:@denops/std@^8.1.1",
+    "@denops/std": "jsr:@denops/std@^8.2.0",
     "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.41.0",
     "@std/async": "jsr:@std/async@^1.0.15",
     "@std/cli": "jsr:@std/cli@^1.0.23",
