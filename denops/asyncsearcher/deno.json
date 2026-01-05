@@ -8,6 +8,6 @@
     "@std/path": "jsr:@std/path@^1.1.4",
     "@std/streams": "jsr:@std/streams@^1.0.16",
     "@std/toml": "jsr:@std/toml@^1.0.11",
-    "zod": "npm:zod@^4.3.4"
+    "zod": "npm:zod@^4.3.5"
   }
 }
