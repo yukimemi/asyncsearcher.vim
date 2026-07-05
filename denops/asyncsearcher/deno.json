@@ -3,7 +3,7 @@
     "@denops/std": "jsr:@denops/std@^8.2.0",
     "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.49.0",
     "@std/async": "jsr:@std/async@^1.5.0",
-    "@std/cli": "jsr:@std/cli@^1.0.31",
+    "@std/cli": "jsr:@std/cli@^1.0.32",
     "@std/fs": "jsr:@std/fs@^1.0.24",
     "@std/path": "jsr:@std/path@^1.1.6",
     "@std/streams": "jsr:@std/streams@^1.1.1",
