@@ -244,10 +244,40 @@ are pinned in `.kata/vars.toml` and bumped by Renovate — do not edit
 them inline in the workflow; the bump would be clobbered on the next
 `kata apply`.
 
-### autogmerge
+CI installs real Vim and Neovim and exports
+`DENOPS_TEST_VIM_EXECUTABLE` / `DENOPS_TEST_NVIM_EXECUTABLE`, because
+`@denops/test` spawns the editors as child processes. Editor versions
+are pinned in `.kata/vars.toml` under `[denops]`. Do not add a
+`shell:` override to the run step — forcing `bash` routes Windows
+through Git Bash, which mangles those executable paths and hangs the
+nvim cases.
+
+### automerge
 
 `.github/workflows/automerge.yml` is seeded by kata on first apply
 and consumer-owned afterward. Renovate bumps action versions
-directly in this file. PRs with the `automerge` label are merged
-automatically when CI passes.
+directly in this file. PRs carrying the `automerge` label are merged
+once their checks pass; the label comes from pj-base's Renovate
+config.
+
+It deliberately contains no test step. `pascalgn/automerge-action`
+already waits for the PR's own checks, and a `deno task ci` here would
+run without vim/nvim, fail, and that failure alone would hold the PR
+at `mergeable_state=unstable` — blocking the merge this workflow
+exists to perform.
+
+### Deno import updates
+
+`.github/workflows/deno-update.yml` is kata-managed. It runs
+`deno outdated --update --latest --recursive` daily and opens a
+rolling `update/deno-imports` PR labelled `automerge`, so ci.yml
+validates the bump and automerge.yml merges it when green. It does
+not run the test suite itself — a broken bump should surface as a red
+PR, not a failed cron with nothing to inspect.
+
+Needs an `APP_ID` variable and `PRIVATE_KEY` secret (GitHub App with
+contents + pull-requests write); the job self-skips when they are
+missing. The App identity is required because PRs opened with
+`GITHUB_TOKEN` do not trigger downstream workflows, so ci.yml would
+never run and automerge could never gate.
 <!-- kata:agents:denops:end -->
