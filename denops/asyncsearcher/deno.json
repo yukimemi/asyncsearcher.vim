@@ -1,7 +1,7 @@
 {
   "imports": {
     "@denops/std": "jsr:@denops/std@^8.2.0",
-    "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.51.0",
+    "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.52.0",
     "@std/async": "jsr:@std/async@^1.5.0",
     "@std/cli": "jsr:@std/cli@^1.0.32",
     "@std/fs": "jsr:@std/fs@^1.0.24",
